@@ -1,6 +1,7 @@
 const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
+const equals = document.querySelector('.equals');
 
 function add(x, y) {
     return x + y;
@@ -21,13 +22,17 @@ function divide(x, y) {
 function operate(x, y, operation) {
     switch (operation) {
         case '+':
-            return add(x, y);
+            updateDisplay(add(x, y));
+            break;
         case '-':
-            return subtract(x, y);
+            updateDisplay(subtract(x, y));
+            break;
         case '×':
-            return multiply(x, y);
+            updateDisplay(multiply(x, y));
+            break;
         case '÷':
-            return divide(x, y);
+            updateDisplay(divide(x, y));
+            break;
     }
 }
 
@@ -53,4 +58,11 @@ operations.forEach((operation) => {
     operation.addEventListener("click", () => {
         handleOperationPress(operation.textContent)
     })
+})
+
+equals.addEventListener('click', () => {
+    if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
+        const [fullExpMatch, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
+        operate(x, y, operation);
+    }
 })
