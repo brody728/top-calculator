@@ -57,8 +57,6 @@ function evalCurrentDisplay() {
         const [_, x, operation, y] = display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/);
         const result = operate(x, y, operation);
         updateDisplay(parseFloat(result.toFixed(5)))
-        // if (display.textContent.match(/\./)) makeDecimalUnpressable();
-        // else makeDecimalPressable();
         makeDecimalPressable();
         return true;
     }
