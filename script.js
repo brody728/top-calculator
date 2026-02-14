@@ -56,7 +56,8 @@ function evalCurrentDisplay() {
     if (display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/)) {
         const [_, x, operation, y] = display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/);
         const result = operate(x, y, operation);
-        updateDisplay(parseFloat(result.toFixed(5)))
+        if (operation != '÷') updateDisplay(parseFloat(result.toFixed(5)));
+        else updateDisplay(result);
         makeDecimalPressable();
         return true;
     }
@@ -76,18 +77,18 @@ let handleOperationPress = function(operation) {
 operations.forEach((operation) => {
     operation.addEventListener("click", () => {
         handleOperationPress(operation.textContent)
-    })
-})
+    });
+});
 
 equals.addEventListener('click', () => {
     evalCurrentDisplay();
     answerDisplayed = true;
-})
+});
 
 clear.addEventListener('click', () => {
     updateDisplay('');
     makeDecimalPressable();
-})
+});
 
 let decimalHandler = function() {
     if (answerDisplayed) updateDisplay('');
