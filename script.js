@@ -3,6 +3,7 @@ const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
 const equals = document.querySelector('.equals');
 const clear = document.querySelector('.clear');
+const decimal = document.querySelector('.decimal');
 let answerDisplayed = false;
 
 function add(x, y) {
@@ -56,9 +57,12 @@ numbers.forEach((number) => {
 });
 
 function evalCurrentDisplay() {
-    if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
-        const [_, x, operation, y] = display.textContent.match(/(\d+\.?\d*)([\+\-×÷]{1})(\d+)/);
+    if (display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/)) {
+        const [_, x, operation, y] = display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/);
         operate(x, y, operation);
+        // if (display.textContent.match(/\./)) makeDecimalUnpressable();
+        // else makeDecimalPressable();
+        makeDecimalPressable();
         return true;
     }
 }
@@ -70,6 +74,7 @@ let handleOperationPress = function(operation) {
         if (evalCurrentDisplay()) updateDisplay(display.textContent + `${operation}`);
         else updateDisplay(display.textContent.replace(/([\+\-×÷]{1})/, operation));
     }
+    makeDecimalPressable();
     answerDisplayed = false;
 }
 
@@ -86,4 +91,24 @@ equals.addEventListener('click', () => {
 
 clear.addEventListener('click', () => {
     updateDisplay('');
+    makeDecimalPressable();
 })
+
+let decimalHandler = function() {
+    if (answerDisplayed) updateDisplay('');
+    updateDisplay(display.textContent + '.')
+    makeDecimalUnpressable();
+    answerDisplayed = false;
+}
+
+function makeDecimalPressable() {
+    decimal.addEventListener('click', decimalHandler);
+    decimal.classList.remove('notPressable');
+}
+
+function makeDecimalUnpressable() {
+    decimal.removeEventListener('click', decimalHandler);
+    decimal.classList.add('notPressable');
+}
+
+makeDecimalPressable();
