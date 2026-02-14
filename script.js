@@ -2,6 +2,7 @@ const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
 const equals = document.querySelector('.equals');
+const clear = document.querySelector('.clear');
 
 function add(x, y) {
     return x + y;
@@ -65,4 +66,8 @@ equals.addEventListener('click', () => {
         const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
         operate(x, y, operation);
     }
+})
+
+clear.addEventListener('click', () => {
+    updateDisplay('');
 })
