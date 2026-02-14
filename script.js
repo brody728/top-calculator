@@ -3,6 +3,7 @@ const numbers = document.querySelectorAll('.number');
 const operations = document.querySelectorAll('.operation');
 const equals = document.querySelector('.equals');
 const clear = document.querySelector('.clear');
+let answerDisplayed = false;
 
 function add(x, y) {
     return x + y;
@@ -43,6 +44,10 @@ function updateDisplay(newDisplay) {
 }
 
 let handleNumberPress = function(newNumber) {
+    if (answerDisplayed) {
+        updateDisplay('');
+        answerDisplayed = false;
+    }
     updateDisplay(display.textContent + `${newNumber}`);
 }
 
@@ -74,6 +79,7 @@ operations.forEach((operation) => {
 
 equals.addEventListener('click', () => {
     evalCurrentDisplay();
+    answerDisplayed = true;
 })
 
 clear.addEventListener('click', () => {
