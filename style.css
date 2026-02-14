@@ -29,6 +29,7 @@
 
 .buttons button {
     flex: 1;
+    height: 3em;
     background-color: aquamarine;
 }
 
