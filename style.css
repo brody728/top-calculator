@@ -10,6 +10,10 @@
     flex-direction: column;
 }
 
+.display {
+    height: 1.5em;
+}
+
 .buttons {
     display: flex;
     align-items: flex-end;
