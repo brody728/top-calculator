@@ -1,3 +1,5 @@
+const display = document.querySelector('.display');
+
 function add(x, y) {
     return x + y;
 }
@@ -25,4 +27,8 @@ function operate(x, y, operation) {
         case '÷':
             return divide(x, y);
     }
+}
+
+function updateDisplay(newDisplay) {
+    display.textContent = newDisplay;
 }
