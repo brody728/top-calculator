@@ -1,6 +1,6 @@
 const display = document.querySelector('.display');
 const numbers = document.querySelectorAll('.number');
-const operations = document.querySelector('.operation');
+const operations = document.querySelectorAll('.operation');
 
 function add(x, y) {
     return x + y;
@@ -42,3 +42,13 @@ let handleNumberPress = function(newNumber) {
 numbers.forEach((number) => {
     number.addEventListener("click", () => {handleNumberPress(number.textContent);});
 });
+
+let handleOperationPress = function(operation) {
+    updateDisplay(display.textContent + `${operation}`);
+}
+
+operations.forEach((operation) => {
+    operation.addEventListener("click", () => {
+        handleOperationPress(operation.textContent)
+    })
+})
