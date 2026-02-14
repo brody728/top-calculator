@@ -51,16 +51,18 @@ numbers.forEach((number) => {
 });
 
 function evalCurrentDisplay() {
-    const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
-    operate(x, y, operation);
+    if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
+        const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
+        operate(x, y, operation);
+        return true;
+    }
 }
 
 let handleOperationPress = function(operation) {
     if (!display.textContent.match(/[\+\-×÷]{1}/)) {
         updateDisplay(display.textContent + `${operation}`);
     } else {
-        evalCurrentDisplay();
-        updateDisplay(display.textContent + `${operation}`);
+        if (evalCurrentDisplay()) updateDisplay(display.textContent + `${operation}`);
     }
 }
 
@@ -71,9 +73,7 @@ operations.forEach((operation) => {
 })
 
 equals.addEventListener('click', () => {
-    if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
-        evalCurrentDisplay();
-    }
+    evalCurrentDisplay();
 })
 
 clear.addEventListener('click', () => {
