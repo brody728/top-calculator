@@ -44,7 +44,9 @@ numbers.forEach((number) => {
 });
 
 let handleOperationPress = function(operation) {
-    updateDisplay(display.textContent + `${operation}`);
+    if (!display.textContent.match(/[\+\-×÷]{1}/)) {
+        updateDisplay(display.textContent + `${operation}`);
+    }
 }
 
 operations.forEach((operation) => {
