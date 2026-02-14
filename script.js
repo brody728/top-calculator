@@ -68,7 +68,9 @@ let handleOperationPress = function(operation) {
         updateDisplay(display.textContent + `${operation}`);
     } else {
         if (evalCurrentDisplay()) updateDisplay(display.textContent + `${operation}`);
+        else updateDisplay(display.textContent.replace(/([\+\-×÷]{1})/, operation));
     }
+    answerDisplayed = false;
 }
 
 operations.forEach((operation) => {
