@@ -22,16 +22,16 @@ function divide(x, y) {
 function operate(x, y, operation) {
     switch (operation) {
         case '+':
-            updateDisplay(add(x, y));
+            updateDisplay(add(+x, +y));
             break;
         case '-':
-            updateDisplay(subtract(x, y));
+            updateDisplay(subtract(+x, +y));
             break;
         case '×':
-            updateDisplay(multiply(x, y));
+            updateDisplay(multiply(+x, +y));
             break;
         case '÷':
-            updateDisplay(divide(x, y));
+            updateDisplay(divide(+x, +y));
             break;
     }
 }
@@ -62,7 +62,7 @@ operations.forEach((operation) => {
 
 equals.addEventListener('click', () => {
     if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
-        const [fullExpMatch, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
+        const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
         operate(x, y, operation);
     }
 })
