@@ -26,17 +26,13 @@ function divide(x, y) {
 function operate(x, y, operation) {
     switch (operation) {
         case '+':
-            updateDisplay(add(+x, +y));
-            break;
+            return add(+x, +y);
         case '-':
-            updateDisplay(subtract(+x, +y));
-            break;
+            return subtract(+x, +y);
         case '×':
-            updateDisplay(multiply(+x, +y));
-            break;
+            return multiply(+x, +y);
         case '÷':
-            updateDisplay(divide(+x, +y));
-            break;
+            return divide(+x, +y);
     }
 }
 
@@ -59,7 +55,8 @@ numbers.forEach((number) => {
 function evalCurrentDisplay() {
     if (display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/)) {
         const [_, x, operation, y] = display.textContent.match(/(\d*\.?\d+)([\+\-×÷]{1})(\d*\.?\d+)/);
-        operate(x, y, operation);
+        const result = operate(x, y, operation);
+        updateDisplay(parseFloat(result.toFixed(5)))
         // if (display.textContent.match(/\./)) makeDecimalUnpressable();
         // else makeDecimalPressable();
         makeDecimalPressable();
