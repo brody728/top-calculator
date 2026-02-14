@@ -57,7 +57,7 @@ numbers.forEach((number) => {
 
 function evalCurrentDisplay() {
     if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
-        const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
+        const [_, x, operation, y] = display.textContent.match(/(\d+\.?\d*)([\+\-×÷]{1})(\d+)/);
         operate(x, y, operation);
         return true;
     }
