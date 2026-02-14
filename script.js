@@ -49,8 +49,16 @@ numbers.forEach((number) => {
     number.addEventListener("click", () => {handleNumberPress(number.textContent);});
 });
 
+function evalCurrentDisplay() {
+    const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
+    operate(x, y, operation);
+}
+
 let handleOperationPress = function(operation) {
     if (!display.textContent.match(/[\+\-×÷]{1}/)) {
+        updateDisplay(display.textContent + `${operation}`);
+    } else {
+        evalCurrentDisplay();
         updateDisplay(display.textContent + `${operation}`);
     }
 }
@@ -63,8 +71,7 @@ operations.forEach((operation) => {
 
 equals.addEventListener('click', () => {
     if (display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/)) {
-        const [_, x, operation, y] = display.textContent.match(/(\d+)([\+\-×÷]{1})(\d+)/);
-        operate(x, y, operation);
+        evalCurrentDisplay();
     }
 })
 
