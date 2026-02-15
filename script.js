@@ -60,16 +60,20 @@ function evalCurrentDisplay() {
         makeDecimalPressable();
         return true;
     }
+    return false;
 }
 
 let handleOperationPress = function(operation) {
-    if (!display.textContent.match(/[\+\-×÷]{1}/)) {
+    if (display.textContent.match(/^\d*\.?\d+$/)) {
         updateDisplay(display.textContent + `${operation}`);
+        makeDecimalPressable();
     } else {
-        if (evalCurrentDisplay()) updateDisplay(display.textContent + `${operation}`);
+        if (evalCurrentDisplay()) {
+            updateDisplay(display.textContent + `${operation}`)
+            makeDecimalPressable();
+        }
         else updateDisplay(display.textContent.replace(/([\+\-×÷]{1})/, operation));
     }
-    makeDecimalPressable();
     answerDisplayed = false;
 }
 
@@ -80,8 +84,7 @@ operations.forEach((operation) => {
 })
 
 equals.addEventListener('click', () => {
-    evalCurrentDisplay();
-    answerDisplayed = true;
+    if (evalCurrentDisplay()) answerDisplayed = true;
 })
 
 clear.addEventListener('click', () => {
